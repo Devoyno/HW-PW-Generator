@@ -6,20 +6,22 @@ var lowerArray = lowerString.split("");
 var upperArray = lowerString.toUpperCase().split("");
 var numString = '0123456789'
 var numArray = numString.split("");
+var specString = '!@#$%^&*()_-?'
+var specArray = specString.split("");
 
 
 //create a function to ask which characters and how long
 function askForOptions() {
-    var passLength = parseInt(prompt("how long"));
+    var passLength = parseInt(prompt("how many characters do you want in your password?"));
   if(passLength < 8 || passLength > 128 || isNaN(passLength) === true) {
-    alert("please choose a valid number");
+    alert("please choose a valid number (between 8-128)");
     return;
   }
 
-    var isLower = confirm("lowercase?");
-    var isUpper = confirm("uppercase?");
-    var isNumber = confirm("use numbers?");
-    var isSpecial = confirm("use special characters?");
+    var isLower = confirm("include lowercase?");
+    var isUpper = confirm("include uppercase?");
+    var isNumber = confirm("include numbers?");
+    var isSpecial = confirm("include special characters?");
 
     var options = {
       passLength,
@@ -50,6 +52,10 @@ function generatePassword() {
   superArray = superArray.concat(numArray)
   console.log(superArray)
  }
+ if(passOptions.isSpecial === true) {
+  superArray = superArray.concat(specArray)
+  console.log(superArray)
+ }
 
  for(var i = 0; i < passOptions.passLength; i++) {
    var index = Math.floor(Math.random() * superArray.length);
@@ -62,11 +68,6 @@ function generatePassword() {
  console.log(results)
  return results.join("")
 
- 
-
-  //accept those options and then build a single array for accepted types
-
-  //Math.floor(Math.Random())
 }
 
 // Write password to the #password input
